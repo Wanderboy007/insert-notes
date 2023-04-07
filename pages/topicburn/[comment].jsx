@@ -18,7 +18,8 @@ export default function Topicburn({ comment }) {
 
   const handleSubmit = async (e) => {
     try {
-      const res = await fetch("http://localhost:3000/api/com", {
+      const BaseURL = process.env.AUTH0_BASE_URL
+      const res = await fetch(`${BaseURL}/api/com`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

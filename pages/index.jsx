@@ -22,10 +22,10 @@ export default function Index() {
 
       <div className="h-screen overflow-hidden">
         <nav className="flex gap-20 justify-center mb-5 py-5 bg-teal-500 rounded-b-lg">
-          <Link href="http://localhost:3000" className="text-xl cursor-pointer">
+          <Link href="" className="text-xl cursor-pointer">
             Home
           </Link>
-          <Link href="http://localhost:3000" className="text-xl cursor-pointer">
+          <Link href="" className="text-xl cursor-pointer">
             About us
           </Link>
           {user ? (
@@ -33,7 +33,7 @@ export default function Index() {
               <div className="text-xl">welcome,{user.name}</div>
               <Link
                 className="text-xl cursor-pointer"
-                href="http://localhost:3000/api/auth/logout"
+                href="/api/auth/logout"
               >
                 Logout
               </Link>
@@ -41,7 +41,7 @@ export default function Index() {
           ) : (
             <Link
               className="text-xl cursor-pointer"
-              href="http://localhost:3000/api/auth/login"
+              href="/api/auth/login"
             >
               Login
             </Link>
@@ -75,7 +75,7 @@ const loggedin = () => {
           </p>
           <Link
             className=" bg-blue-500 my-10 p-2 w-fit text-3xl rounded-md"
-            href="http://localhost:3000/api/auth/login"
+            href="/api/auth/login"
           >
             Login
           </Link>
@@ -107,10 +107,10 @@ const Notloggedin = () => {
   console.log("s" + student);
 
   if (user) {
-    console.log("");
+    // console.log("");
     const handleSubmit = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/getuser", {
+        const res = await fetch("/api/getuser", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -199,16 +199,17 @@ const Notloggedin = () => {
             </div>
           </div>
 
-          {/* <Link className="flex justify-center  " href="#"> */}
-          <button
+          {/* <button
             type="submit"
             onSubmit={(e) => handleSubmit()}
             className="flex items-center justify-center gap-3"
           >
             <div className="text-4xl">Next</div>
             <BsFillArrowRightSquareFill className="text-4xl" />
-          </button>
-          {/* </Link> */}
+          </button> */}
+          <Link className="flex justify-center  " href="/home">
+            home
+          </Link>
         </form>
       </>
     );

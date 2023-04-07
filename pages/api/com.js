@@ -4,7 +4,7 @@ import user from "../../models/user";
 
 initDB();
 
-export default async (req, res) => {
+export default async function Com (req, res) {
   switch (req.method) {
     case "GET":
       async function getUser(req, res) {

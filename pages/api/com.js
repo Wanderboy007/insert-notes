@@ -4,7 +4,7 @@ import user from "../../models/user";
 
 initDB();
 
-export default async function Com (req, res) {
+export default async function Com(req, res) {
   switch (req.method) {
     case "GET":
       async function getUser(req, res) {
@@ -35,9 +35,10 @@ export default async function Com (req, res) {
           console.log(err);
         }
       }
+      saveProduct(req, res);
       break;
   }
-};
+}
 
 // const  saveProduct = async (req, res) => {
 //   const { name, comment, extra, teacher } = req.body;

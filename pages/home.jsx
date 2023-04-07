@@ -81,7 +81,7 @@ export default function Home() {
             href=""
             className="rounded-lg text-2xl hover:bg-cyan-500 opacity-40 text-center"
           >
-            yo Digestive
+            Digestive
           </a>
         </div>
       </div>

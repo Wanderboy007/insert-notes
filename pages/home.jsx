@@ -75,7 +75,7 @@ export default function Home() {
             href=""
             className="rounded-lg text-2xl hover:bg-cyan-500 opacity-40 text-center"
           >
-            Reproductive
+            reproductive
           </a>
           <a
             href=""

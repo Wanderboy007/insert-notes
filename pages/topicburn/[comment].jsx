@@ -1,8 +1,11 @@
 import { FaChalkboardTeacher } from "react-icons/fa";
 import React, { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import Styles from "../styles/viewpdf.module.css";
+import Styles from "../../styles/viewpdf.module.css";
 import Link from "next/link";
+import clientPromise from "../../lib/mongodb";
+
+
 export default function Topicburn({ comment }) {
   const { user, error, isLoading } = useUser();
   const [scroller, setscroller] = useState(false);
@@ -65,19 +68,19 @@ export default function Topicburn({ comment }) {
   return (
     <>
       <nav className="flex gap-20 justify-center mb-5 py-5 bg-teal-500 rounded-b-lg">
-        <Link href="http://localhost:3000" className="text-xl cursor-pointer">
+        <Link href="" className="text-xl cursor-pointer">
           Home
         </Link>
-        <Link href="http://localhost:3000" className="text-xl cursor-pointer">
+        <Link href="" className="text-xl cursor-pointer">
           About us
         </Link>
         <Link
-          href="http://localhost:3000/ass"
+          href="/ass"
           className="text-xl cursor-pointer"
         >
           Assessment
         </Link>
-        <Link href="http://localhost:3000" className="text-xl cursor-pointer">
+        <Link href="" className="text-xl cursor-pointer">
           Notes
         </Link>
         {user ? (
@@ -85,7 +88,7 @@ export default function Topicburn({ comment }) {
             <div className="text-xl">welcome,{user.nickname}</div>
             <Link
               className="text-xl cursor-pointer"
-              href="http://localhost:3000/api/auth/logout"
+              href="/api/auth/logout"
             >
               Logout
             </Link>
@@ -93,7 +96,7 @@ export default function Topicburn({ comment }) {
         ) : (
           <Link
             className="text-xl cursor-pointer"
-            href="http://localhost:3000/api/auth/login"
+            href="/api/auth/login"
           >
             Login
           </Link>
@@ -928,23 +931,38 @@ export default function Topicburn({ comment }) {
   );
 }
 
-export async function getStaticProps() {
-  const UserRes = await fetch("http://localhost:3000/api/com");
-  const comment = await UserRes.json();
-  console.log(comment);
+export async function getStaticProps(context) {
+  const client = await clientPromise;
+  const db = client.db("test");
+
+  const searchRoute = context.params.comment;
+
+  const userData = await db
+    .collection("newcoms")
+    .find({ name: searchRoute })
+    .sort({ metacritic: -1 })
+    .toArray();
+
+
   return {
-    props: { comment },
+    props: {
+      comment: JSON.parse(JSON.stringify(userData))
+    },
   };
 }
-
 export async function getStaticPaths() {
-  const UserRes = await fetch("http://localhost:3000/api/com");
-  const comment = await UserRes.json();
-  console.log(comment);
-  const paths = comment.map((context) => ({
-    params:  context.id,
+
+  const client = await clientPromise;
+  const db = client.db("test");
+
+  const searchProjects = await db.collection("newcoms").find({}).toArray();
+  console.log(searchProjects);
+
+  const paths = searchProjects.map((context) => ({
+    // params: { userName : searchRoute, projectName: userPath.projectName },
+    params: { comment: context.name },
   }));
 
   console.log(paths);
-  return { paths, fallback: "blocking" };
+  return { paths, fallback: 'blocking' };
 }

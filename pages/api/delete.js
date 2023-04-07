@@ -3,7 +3,7 @@ import usercomment from "../../models/usercomment";
 
 initDB();
 
-export default async (req, res) => {
+export default async function Delete (req, res) {
   switch (req.method) {
     case "DELETE":
       await deletecom(req, res);

@@ -12,7 +12,7 @@ export default function Home() {
             <div className="text-xl">welcome,{user.name}</div>
             <a
               className="text-xl cursor-pointer"
-              href="http://localhost:3000/api/auth/logout"
+              href="api/auth/logout"
             >
               Logout
             </a>
@@ -20,7 +20,7 @@ export default function Home() {
         ) : (
           <a
             className="text-xl cursor-pointer"
-            href="http://localhost:3000/api/auth/login"
+            href="api/auth/login"
           >
             Login
           </a>

@@ -6,13 +6,13 @@ import Link from "next/link";
 import clientPromise from "../../lib/mongodb";
 
 
-export default function Topicburn({dbdata}) {
+export default function Topicburn({comment}) {
   const { user, error, isLoading } = useUser();
   const [scroller, setscroller] = useState(false);
   const [mess, setMessage] = useState("");
   const [extra, setextra] = useState("");
  
-  console.log(dbdata)
+  
   if (user) {
     console.log(user.name);
   } 
@@ -886,7 +886,7 @@ export default function Topicburn({dbdata}) {
       </div>
 
       <div className="flex flex-col gap-5  rounded-lg items-center m-2">
-        {dbdata.map((com) => (
+        {comment.map((com) => (
           <div
             className="flex flex-col justify-center border-2 rounded-lg w-2/3"
             key={com._id}

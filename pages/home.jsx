@@ -42,7 +42,7 @@ export default function Home() {
             Endocrine
           </a>
           <a
-            href="./topicburn"
+            href="./topicburn/hero22"
             className="rounded-lg text-2xl hover:bg-cyan-900 opacity-100 text-center"
           >
             Burn

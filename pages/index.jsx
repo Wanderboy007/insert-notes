@@ -192,6 +192,7 @@ const Notloggedin = () => {
                       setTeacher(false);
                     }
                   }}
+                  required
                 />
               ) : (
                 ""

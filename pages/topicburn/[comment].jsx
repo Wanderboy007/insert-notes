@@ -6,16 +6,26 @@ import Link from "next/link";
 import clientPromise from "../../lib/mongodb";
 
 
-export default function Topicburn({ comment }) {
+export default function Topicburn({dbdata}) {
   const { user, error, isLoading } = useUser();
   const [scroller, setscroller] = useState(false);
-  const [mess, setMessage] = useState("aefsad");
-  const [extra, setextra] = useState("aefsad");
-
+  const [mess, setMessage] = useState("");
+  const [extra, setextra] = useState("");
+ 
+  console.log(dbdata)
   if (user) {
     console.log(user.name);
+  } 
+
+   async function getMessageDB() {
+    const BaseURL = process.env.AUTH0_BASE_URL
+    const res = await fetch(`${BaseURL}/api/com`)
+    const message = await res.json();
+    console.log(message)
+    return {message}
   }
 
+  getMessageDB
   const handleSubmit = async (e) => {
     try {
       const BaseURL = process.env.AUTH0_BASE_URL
@@ -876,7 +886,7 @@ export default function Topicburn({ comment }) {
       </div>
 
       <div className="flex flex-col gap-5  rounded-lg items-center m-2">
-        {comment.map((com) => (
+        {dbdata.map((com) => (
           <div
             className="flex flex-col justify-center border-2 rounded-lg w-2/3"
             key={com._id}
@@ -933,8 +943,13 @@ export default function Topicburn({ comment }) {
 }
 
 export async function getStaticProps(context) {
+  const url = process.env.AUTH0_BASE_URL;
   const client = await clientPromise;
-  const db = client.db("test");
+  const db = client.db("test"); 
+
+  const fetchfromdb = await fetch(`${url}/api/com`) 
+  const DBdata = await fetchfromdb.json(); 
+  console.log(DBdata);
 
   const searchRoute = context.params.comment;
 
@@ -947,17 +962,40 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      comment: JSON.parse(JSON.stringify(userData))
+      comment: JSON.parse(JSON.stringify(userData)),
+      dbdata:DBdata
+      
     },
   };
 }
+
+
+
+// export async function getStaticPaths() {
+
+//   const client = await clientPromise;
+//   const db = client.db("test");
+
+//   const searchProjects = await db.collection("newcoms").find({}).toArray();
+//   // console.log(searchProjects); 
+
+//   const paths = searchProjects.map((context) => ({
+//     // params: { userName : searchRoute, projectName: userPath.projectName },
+//     params: { comment: context.name },
+//   }));
+
+//   console.log(paths);
+//   return { paths, fallback: 'blocking' };
+// }
+
+
 export async function getStaticPaths() {
 
   const client = await clientPromise;
   const db = client.db("test");
 
   const searchProjects = await db.collection("newcoms").find({}).toArray();
-  console.log(searchProjects);
+  // console.log(searchProjects); 
 
   const paths = searchProjects.map((context) => ({
     // params: { userName : searchRoute, projectName: userPath.projectName },

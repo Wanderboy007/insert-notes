@@ -1,5 +1,5 @@
 import { FaChalkboardTeacher } from "react-icons/fa";
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Styles from "../../styles/viewpdf.module.css";
 import Link from "next/link";
@@ -11,25 +11,28 @@ export default function Topicburn({comment}) {
   const [scroller, setscroller] = useState(false);
   const [mess, setMessage] = useState("");
   const [extra, setextra] = useState("");
- 
+  const[res,setRes] = useState([])
+ console.log(res)
   
+  useEffect(() => {
+   
+      
+      const res =  fetch("/api/com").then((response) =>{return response.json()}).then((data) =>{setRes(data)})
+      
+      
+  }, []);
+
   if (user) {
     console.log(user.name);
   } 
 
-   async function getMessageDB() {
-    const BaseURL = process.env.AUTH0_BASE_URL
-    const res = await fetch(`${BaseURL}/api/com`)
-    const message = await res.json();
-    console.log(message)
-    return {message}
-  }
+   
 
-  getMessageDB
+
   const handleSubmit = async (e) => {
     try {
       const BaseURL = process.env.AUTH0_BASE_URL
-      const res = await fetch(`${BaseURL}/api/com`, {
+      const res = await fetch(`/api/com`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -886,7 +889,7 @@ export default function Topicburn({comment}) {
       </div>
 
       <div className="flex flex-col gap-5  rounded-lg items-center m-2">
-        {comment.map((com) => (
+        {res.map((com) => (
           <div
             className="flex flex-col justify-center border-2 rounded-lg w-2/3"
             key={com._id}

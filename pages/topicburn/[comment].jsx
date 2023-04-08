@@ -943,13 +943,10 @@ export default function Topicburn({dbdata}) {
 }
 
 export async function getStaticProps(context) {
-  const url = process.env.AUTH0_BASE_URL;
+
   const client = await clientPromise;
   const db = client.db("test"); 
 
-  const fetchfromdb = await fetch(`${url}/api/com`) 
-  const DBdata = await fetchfromdb.json(); 
-  console.log(DBdata);
 
   const searchRoute = context.params.comment;
 
@@ -963,7 +960,6 @@ export async function getStaticProps(context) {
   return {
     props: {
       comment: JSON.parse(JSON.stringify(userData)),
-      dbdata:DBdata
       
     },
   };

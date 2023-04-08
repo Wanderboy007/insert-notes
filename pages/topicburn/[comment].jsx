@@ -855,7 +855,7 @@ export default function Topicburn({dbdata}) {
             ✓ Assess neurologic status: consciousness, psychological status,
             pain and anxiety levels, and behaviour.
             <br />
-            ✓ Assess patient’s and family’s understanding of injury and
+            ✓ Assess patient’s and family’ s understanding of injury and
             treatment. Assess patient’s support system and coping skills.
             <br />
             ✓ Focus on the major priorities of any trauma patient. the burn

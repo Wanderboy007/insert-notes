@@ -10,24 +10,38 @@ export default function Topicburn({comment}) {
   const { user, error, isLoading } = useUser();
   const [scroller, setscroller] = useState(false);
   const [mess, setMessage] = useState("");
-  const [extra, setextra] = useState("");
+  const [extra, setextra] = useState(""); 
+
   const[res,setRes] = useState([])
- console.log(res)
+
+// --------------------------------------------------------------------------
+
+  const[notestab,setNotab] = useState(false)
+  const [notes,setNotes] = useState([]);
+  console.log(notes)
+  
+  
+    function onnotes(){ 
+      setNotes((prev)=>[...prev,{extra}])
+    
+    }
+
+
+// -----------------------------------------------------------------------------
   
   useEffect(() => {
    
       
-      const res =  fetch("/api/com").then((response) =>{return response.json()}).then((data) =>{setRes(data)})
-      
-      
-  }, []);
+    const res =  fetch("/api/com").then((response) =>{return response.json()}).then((data) =>{setRes(data)})
+    
+    
+}, []);
 
-  if (user) {
-    console.log(user.name);
-  } 
 
-   
 
+if (user) {
+  console.log(user.name);
+} 
 
   const handleSubmit = async (e) => {
     try {
@@ -54,6 +68,7 @@ export default function Topicburn({comment}) {
       console.log(err);
     }
   };
+  // -------------------------------------------------------------------------
 
   const selecttext = (event) => {
     const a = window.getSelection().toString();
@@ -68,7 +83,7 @@ export default function Topicburn({comment}) {
     elem.style.top = totaly + "px";
     elem.style.left = posx - 50 + "px";
   };
-
+// --------------------------------------------------------------------------------
   function scrl(x) {
     window.scrollTo(0, x);
   }
@@ -94,9 +109,9 @@ export default function Topicburn({comment}) {
         >
           Assessment
         </Link>
-        <Link href="" className="text-xl cursor-pointer">
+        <div onClick={()=>setNotab(!notestab)} className="text-xl cursor-pointer inline">
           Notes
-        </Link>
+        </div> 
         {user ? (
           <div className="flex gap-20">
             <div className="text-xl">welcome,{user.nickname}</div>
@@ -116,6 +131,35 @@ export default function Topicburn({comment}) {
           </Link>
         )}
       </nav>
+
+
+
+      {/* ---------------------------------------navbar ends------------------------------------------- */}
+
+
+{/* -----------------------------------notes---------------------------------------- */}
+
+<div className="w-2/3 h-screen "></div>
+
+{/* -----------------------------------notes ends---------------------------------------- */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div>
         <h1 className="text-7xl text-center m-5">Burn Management</h1>
         <div
@@ -149,8 +193,8 @@ export default function Topicburn({comment}) {
           <> </>
         )}
         <div className={Styles.paracont}>
-          <h2 className="text-5xl text-center my-10">INTRODUCTION</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-bold dark:text-white">INTRODUCTION</h2>
+          <p onMouseUp={selecttext} className="my-4 text-lg text-gray-500">
             Skin is the outermost covering and the largest organ of the
             integumentary system of our body. It protects deeper tissue from
             harsh environment, regulate temperature, and prevents loss of water;
@@ -161,7 +205,7 @@ export default function Topicburn({comment}) {
             protection barrier but burns destroy the protection shield, and our
             body gets exposed to various external impetuses.
           </p>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             A burn occurs when heat, chemicals, sunlight, electricity or
             radiation damages skin tissue. Most burns happen accidentally. There
             are different degrees of burns. Your healthcare provider determines
@@ -169,15 +213,15 @@ export default function Topicburn({comment}) {
             and the amount of affected skin. Burns can be painful. Left
             untreated, a burn can lead to infection.
           </p>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Burn is associated with severe skin damage. therefore, serious burns
             injury needs immediate medical support to prevent further
             complication and death. Burns occurs when energy from a heat source
             is transferred to the tissues of the body. Heat may be transferred
             through conduction or electromagnetic radiation.
           </p>
-          <h2 className="text-5xl text-center my-10">Burns</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-white">Burns</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             A burn is an injury to the skin or other organic tissue primarily
             caused by heat or due to radiation, radioactivity, electricity,
             friction or contact with chemicals.
@@ -192,16 +236,16 @@ export default function Topicburn({comment}) {
             <em>-hot solids (contact burns)</em>
             <em>-flames (flame burns)</em>
           </ol>
-          <h3 className="text-5xl my-10">TYPES OF BURNS INJURY :</h3>
+          <h3 className="text-4xl font-extrabold dark:text-black">TYPES OF BURNS INJURY :</h3>
           <h3 className="text-3xl my-10">Primary Injury</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             It is the immediately damage caused by the burns . Little can be
             done to limit the primary injury in most cases of trauma. However a
             prompt removal of the heat source and rapid cooling of the burns
             limit the extent of primary injury
           </p>
           <h3 className="text-3xl my-10">Secondary injury</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             It is the deleterious effect resulting from the primary injury. A
             major burns can result in loss of fluids, secondary infection,
             endogenous and exogenous release of toxins, fluids shift ,
@@ -217,76 +261,76 @@ export default function Topicburn({comment}) {
             <em>-Inhalation injury</em>
           </ol>
 
-          <h2 className="text-5xl text-center my-10">
+          <h2 className="text-4xl font-extrabold dark:text-white">
             CLASSIFICATION OF BURNS{" "}
           </h2>
           <h3 className="text-3xl my-10">A: According to burn depth :</h3>
           <h3 className="text-3xl my-10">
             • Superficial Partial thickness or 1st degree burns:
           </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             In this involve only upper layer of skin the epidermis ( skin
             surface).it usually produce a pink to reddish colour on the burned
             skin and very sensitive to touch and skin appear blanched when light
             pressure is applied. This burns is produce redness pain and minor
             swelling. Healing time is about 3 – 6 days.
           </p>
-          <h3 className="text-5xl my-10">
+          <h3 className="text-4xl font-extrabold dark:text-black">
             • Deep partial thickness and second degree burns:
           </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             It affect both the outer layer ( epidermis ) and under layer lining
             of skin ( dermis ) causing redness, pain , swelling and blisters.
             There symptoms include red, blistered, and may be swollen and
             painful.
           </p>
-          <h3 className="text-5xl my-10">
+          <h3 className="text-4xl font-extrabold dark:text-black">
             • Full thickness and third-degree burns:
           </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Third-degree burns destroy the epidermis and dermis. They may go
             into the innermost layer of skin, the subcutaneous tissue. The burn
             site may look white or blackened and charred.
           </p>
-          <h3 className="text-5xl my-10">• Fourth-degree burns:</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">• Fourth-degree burns:</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Fourth-degree burns go through both layers of the skin and
             underlying tissue as well as deeper tissue, possibly involving
             muscle and bone. There is no feeling in the area since the nerve
             endings are destroyed.
           </p>
-          <h2 className="text-5xl text-center my-10">
+          <h2 className="text-4xl font-extrabold dark:text-white">
             B) According to burn severity:
           </h2>
-          <h3 className="text-5xl my-10">1) Minor Burns :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">1) Minor Burns :</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             All 1st degree burns as well as second degree burns that involves
             less than 10% of the body surface usually are classified as minor
           </p>
-          <h3 className="text-5xl my-10">2) Moderate burns:</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">2) Moderate burns:</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Burns involving hand s and feet face or genital , second degree
             burns involving more than 10 % body surface area . superficial
             partial thickness burns of the head hand and feet or perineum
             suspected child abuse concomitant trauma and significant
             pre-existing disease
           </p>
-          <h3 className="text-5xl my-10">3) Severe Burns :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">3) Severe Burns :</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Burns surface involvement of 25% body surface area .All third degree
             burns classified as moderate or more often or severe Full thickness
             burn 10% Body surface area.
           </p>
-          <h2 className="text-5xl text-center my-10">
+          <h2 className="text-4xl font-extrabold dark:text-white">
             C) According to the extent of body surface area injured:
           </h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Burns surface involvement of 25% body surface area .All third degree
             burns classified as moderate or more often or severe Full thickness
             burn 10% Body surface area.
           </p>
           <h3 className="text-3xl my-10">✓ The rule of nine :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             This allows the emergency medical provider to obtain a quick
             estimate of how much body surface area is burned. For example, if a
             patient&apos;s entire back (18%) and entire left leg (18%) are
@@ -299,7 +343,7 @@ export default function Topicburn({comment}) {
             27%.
           </p>
           <h3 className="text-3xl my-10">✓ Lund and Browder method :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             For children and infants, the Lund-Browder chart is used to assess
             the burned body surface area. Different percentages are used because
             the ratio of the combined surface area of the head and neck to the
@@ -307,7 +351,7 @@ export default function Topicburn({comment}) {
             of an adult.
           </p>
           <h3 className="text-3xl my-10">✓ Palm method</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             The &quot;rule of palm&quot; is another way to estimate the size of
             a burn. The palm of the person who is burned (not fingers or wrist
             area) is about 1% of the body. Use the person&apos;s palm to measure
@@ -318,7 +362,7 @@ export default function Topicburn({comment}) {
             ❖ Pathophysiology of burns :
           </h2>
           <h3 className="text-3xl my-10">❖ Diagnostic studies in burns:</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             1) Complete blood test : initial increased haematocrit (Hct) due to
             fluid loss, decreased haematocrits Hct and RBC may occur due to heat
             damage due to vascular endothelium.
@@ -338,7 +382,7 @@ export default function Topicburn({comment}) {
             8) Bronchoscopy
           </p>
           <h2 className="text-3xl text-center my-10">Management of burns :</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Burn managements can be organized chronologically into three phases
             emergent (resuscitative) , acute ( wound healing ) , and
             rehabilitative (restorative ) . For example , the emergent phase
@@ -351,7 +395,7 @@ export default function Topicburn({comment}) {
             in both the emergent and rehabilitation phase.
           </p>
           <h2 className="text-3xl text-center my-10">PREHOSPITAL PHASE :</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             • At the scene of the injury, priority is given to removing the
             person from the source of the burn and stopping the urning process.
             <br />
@@ -362,7 +406,7 @@ export default function Topicburn({comment}) {
             electrical or inhalation burn is suspected , first focus ABC:
           </p>
           <h3 className="text-3xl my-10">1) Airway management :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ➢ Airway stability should be assessed rapidly in burns involving
             facial or suspected inhalation injuries, particularly in the early
             period following injury when the airway is at risk of obstruction
@@ -371,16 +415,16 @@ export default function Topicburn({comment}) {
             face and neck, laryngeal edema may need intubation and tracheostomy.
           </p>
           <h3 className="text-3xl my-10">2) Breathing :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Check adequacy of ventilation
           </p>
           <h3 className="text-3xl my-10">3) Circulation :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             - Check for the presence and regularity of pulses and elevate the
             burned limb above the heart to decrease pain and swelling
           </p>
           <h3 className="text-3xl my-10">Hyperbaric oxygen therapy :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ➢ Oxygen administration is pivotal increasing the gradient for
             oxygen binding to haemoglobin, so that unbound CO can be exhaled
             through the lungs. Oxygen saturation is an unreliable oxygenation
@@ -388,8 +432,8 @@ export default function Topicburn({comment}) {
             <br />➢ The use of HBOT, or hyperbaric oxygen, greatly reduces the
             burn victims chances of severe infection or death.
           </p>
-          <h2 className="text-5xl my-10">NURSING ASSESSMENT:-</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">NURSING ASSESSMENT:-</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ➢ Remove jewellery and clothing in contact with burn source
             <br />
             ➢ Cool affected area as soon as possible (within 3 hours from time
@@ -427,8 +471,8 @@ export default function Topicburn({comment}) {
             Tissue destruction may continue for up to 72 hour after contact with
             some chemicals.
           </p>
-          <h2 className="text-5xl my-10">EMERGENT PHASE :</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">EMERGENT PHASE :</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             The emergent ( resuscitative ) phase is the time required to resolve
             the immediate , life threatening problems resulting from burn
             injury. This phase usually last up to 48 hours from the time the
@@ -437,8 +481,8 @@ export default function Topicburn({comment}) {
             formation. The emergent phase ends when fluid mobilization and
             diuresis begins.
           </p>
-          <h3 className="text-5xl my-10">EMERGENT PHASE :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">EMERGENT PHASE :</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Hypovolemic shock caused by a massive shift of fluids out of the
             blood vessels as a result of increased capillary permeability and
             can begins as early as 20 minutes postburn. As the capillary walls
@@ -446,8 +490,8 @@ export default function Topicburn({comment}) {
             especially albumin) move into their interstitial spaces and other
             surrounding tissue.
           </p>
-          <h3 className="text-5xl my-10">Fluid management: </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">Fluid management: </h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Replacing fluids and electrolyte is an essential part of the
             treatment of burns victim and initiated as soon as possible as the
             severity of the burns and the patient condition is the unknown.
@@ -458,8 +502,8 @@ export default function Topicburn({comment}) {
             worldwide for fluid resuscitation. The formula calculate the volume
             of fluid required based on TBSA involved
           </p>
-          <h3 className="text-5xl my-10">1) Parkland formula: </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">1) Parkland formula: </h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             4ml × Body weight (kg) ×TBSA (%) = Total fluid volume in 1st 24
             hours (1/2 of volume given in 1st 8 hours, ½ of the volume given
             over next 16 hour) Initial 24 hours : Ringer lactated ( RL) solution
@@ -488,22 +532,22 @@ export default function Topicburn({comment}) {
             colloid infusion of 5 % albumin 0.3 – 1 ml / kg / % burn / 16 / hr
             is started.
           </p>
-          <h3 className="text-5xl my-10">2) Consensus formula :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">2) Consensus formula :</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Lacted ringer solution ( or other balanced saline solution ):
             <br />
             2-4 mL Ringers Lactate x weight in kg x % TBSA= mLs in first 24
             hours. Give half of this total in the first 8 hours post burn :
             Pediatrics use 3 mL: Electrical injuries use 4mL.
           </p>
-          <h3 className="text-5xl my-10">3. Evans formula</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">3. Evans formula</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Normal saline at 1 ml/kg/% TBSA burn colloid at 1 ml/kg/% TBSA burn.
             For second 24 hours, give half of the first 24-hour requirements
             &quot; D5W (dextrose 5% in water) 2000 ml.
           </p>
-          <h3 className="text-5xl my-10">4) Brooke army formula :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">4) Brooke army formula :</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             2mls x body surface areas burned (BSAB) x weight. The Parkland
             formula is 4mls x body surface areas burned (BSAB) x weight. Both
             formulas estimate the first 24 hour fluid requirements from the time
@@ -523,8 +567,8 @@ export default function Topicburn({comment}) {
             ➢ Level of consciousness
             <br />➢ Laboratory values
           </p>
-          <h3 className="text-5xl my-10">Antibiotic protocol in burns:</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">Antibiotic protocol in burns:</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Patient care is improved by promoting the best practice in
             antibiotics prophylaxis and therapy Antibiotic will be given only
             when patient actually requires . If the the clinical condition is
@@ -534,8 +578,8 @@ export default function Topicburn({comment}) {
             secondary infection should be reconsidered. The antibiotic should be
             given for the minimum length of time that is effective.
           </p>
-          <h2 className="text-5xl my-10">Antibiotic protocol in burns:</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">Antibiotic protocol in burns:</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Commonly used topical agents include combination antimicrobial
             ointments, silver sulfadiazine, bismuth-impregnated petroleum gauze,
             mafenide, and chlorhexidine Other agents such as honey,
@@ -543,8 +587,8 @@ export default function Topicburn({comment}) {
             Combinations of antimicrobials with topical antifungal agents have
             also demonstrated some efficacy for the local treatment of burns
           </p>
-          <h3 className="text-5xl my-10">DRUGS </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">DRUGS </h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ▪ Tetanus immunization
             <br />
             ▪ Analgesic : Morphine , Fentanyl, methadone, NSAID (ketorolac) ,
@@ -560,9 +604,9 @@ export default function Topicburn({comment}) {
             zinc , iron
             <br />▪ Gastrointestinal support : Ranitidine , Nystatin .
           </p>
-          <h2 className="text-5xl my-10">SURGERY: - </h2>
-          <h3 className="text-5xl my-10">Escharotomy</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">SURGERY: - </h2>
+          <h3 className="text-4xl font-extrabold dark:text-black">Escharotomy</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             • The aim of the escharotomy is to release the pressure over the
             involved deeper tissues and to restore their circulation.
             <br />
@@ -580,8 +624,8 @@ export default function Topicburn({comment}) {
             any residual constrictions should be checked by running a finger
             along the length of the incision.
           </p>
-          <h3 className="text-5xl my-10">Fasciotomy:</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">Fasciotomy:</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             • Fasciotomies are performed when there are circumferential burns.
             <br />
             • It is a surgical procedure to incise fascia to relieve pressure
@@ -598,8 +642,8 @@ export default function Topicburn({comment}) {
             appearance of the skin . Some of these procedural involve several
             months of preparation to improve tissue .
           </p>
-          <h1 className="text-5xl my-10">NURSING MANAGEMENT</h1>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h1 className="text-4xl font-extrabold dark:text-black">NURSING MANAGEMENT</h1>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ➢ Monitor hemodynamically status
             <br />
             ➢ Keep accurate record of intake and output to monitor fluid loss
@@ -619,8 +663,8 @@ export default function Topicburn({comment}) {
             <br />➢ Monitor systematics and localized agent and symptoms for
             infection
           </p>
-          <h2 className="text-5xl my-10">ACUTE PHASE</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">ACUTE PHASE</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Begins 48 to 72 hours after the burn injury. In this phase the
             extracellular fluid start mobilize and start diuresis. This phase
             complete when wound is covered by skin graft or wound are healed.
@@ -638,8 +682,8 @@ export default function Topicburn({comment}) {
             <br />
             5) Nutritional therapy
           </p>
-          <h3 className="text-5xl my-10">1) WOUND CARE :</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">1) WOUND CARE :</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Goal : Prevent infection by cleansing and debriding the area of
             necrotic tissue that would promote bacterial growth and promote
             wound re-epithelialization and or successful skin grafting.
@@ -664,8 +708,8 @@ export default function Topicburn({comment}) {
             dressing materials (eg, gauze, nonadherent films, honey , bactrigras
             dressing )
           </p>
-          <h3 className="text-5xl my-10">2) DEBRIDEMENT AND SKIN GRAFTING</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">2) DEBRIDEMENT AND SKIN GRAFTING</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             • If patient is stable, then early excision is done within 48 hours.
             <br />
             • At a time, 15-20% dead skin is excised, and the wound is covered
@@ -689,8 +733,8 @@ export default function Topicburn({comment}) {
             <br />• Biobrane is used to cover donor sites and aid in coverage of
             large surface area burns, including hands, feet, and joints
           </p>
-          <h3 className="text-5xl my-10">3) PAIN MANAGEMENT</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">3) PAIN MANAGEMENT</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Burn patient experience two kind of pain
             <br />
             1) Continuous background pain that might be present throughout the
@@ -716,10 +760,10 @@ export default function Topicburn({comment}) {
             biofeedback, and musical therapy .<br />• Patient control analgesia
             is used in selected circumstances in some burn centers
           </p>
-          <h3 className="text-5xl my-10">
+          <h3 className="text-4xl font-extrabold dark:text-black">
             4) PHYSICAL AND OCCUPATIONAL THERAPY:
           </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             Continuous physical therapy ,passive and active ROM should be
             performed on all joints. Ensure that the patient with neck burns
             continue to sleep without pillows or head hanging slightly over the
@@ -727,8 +771,8 @@ export default function Topicburn({comment}) {
             occupational therapy schedule for wearing custom fitted splint ,
             which are designated to keep joint in functional positions.
           </p>
-          <h3 className="text-5xl my-10">5) NUTRITIONAL THERAPY </h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">5) NUTRITIONAL THERAPY </h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             When the wounds are still open the burn patient is in a
             hypermetabolic and highly catabolic state. Encourage patient to eat
             high protein, high carbohydrate foods to meet caloric needs. <br />
@@ -751,8 +795,8 @@ export default function Topicburn({comment}) {
             g. The starting quantity is 10 mL/h for every 6 hours to reach a
             maximum of 3-5 mL/kg/h for children and 2 ml/kg/h for adults.
           </p>
-          <h1 className="text-5xl my-10">NURSING MANAGEMENT</h1>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h1 className="text-4xl font-extrabold dark:text-black">NURSING MANAGEMENT</h1>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ➢ Weight patient daily and monitor trends to detect early signs of
             fluid imbalance.
             <br />
@@ -772,8 +816,8 @@ export default function Topicburn({comment}) {
             nutritional needs .<br />➢ Monitor food/ fluids ingested and
             calculate daily caloric intake to assess adequacy of diet.
           </p>
-          <h2 className="text-5xl my-10">REHABILITATION PHASE :</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">REHABILITATION PHASE :</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             The formal rehabilitative phase begin with the patient wounds have
             healed and he or she engaging in some level of self care. This may
             happen as early as 2 weeks or as long as 7 to 8 month after burn
@@ -806,8 +850,8 @@ export default function Topicburn({comment}) {
             concern about future therapy and surgery frustration with ongoing
             discomfort and treatment and hopelessness about the future.
           </p>
-          <h2 className="text-5xl my-10">NURSING MANAGEMENT :</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">NURSING MANAGEMENT :</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             ➢ Determine the impact of the pain experience on quality of life
             (e.g. sleep, appetite, activity , cognition, mood , relationship of
             job, and role responsibility) to plan long term pain management
@@ -819,8 +863,8 @@ export default function Topicburn({comment}) {
             <br />➢ Refer for diet teaching and planning to meet long term
             nutritional needs.
           </p>
-          <h2 className="text-5xl my-10">NURSING DIAGNOSIS :</h2>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h2 className="text-4xl font-extrabold dark:text-black">NURSING DIAGNOSIS :</h2>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             • Acute pain related to destruction of skin/ tissue as evidence by
             restlessness.
             <br />
@@ -840,8 +884,8 @@ export default function Topicburn({comment}) {
             •Imbalance nutrition less than body requirements related to
             hypermetabolic state as evidence by anorexia.
           </p>
-          <h3 className="text-5xl my-10">GENERAL NURSING MANAGEMENT:</h3>
-          <p onMouseUp={selecttext} className={Styles.para}>
+          <h3 className="text-4xl font-extrabold dark:text-black">GENERAL NURSING MANAGEMENT:</h3>
+          <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             The nursing assessment focuses on the major priorities for any
             trauma patient; the burn wound is a secondary consideration.
             <br />
@@ -938,7 +982,7 @@ export default function Topicburn({comment}) {
         <button className="rounded-l-lg bg-slate-100 px-2" onClick={Askclick}>
           Ask?
         </button>
-        <button className="bg-slate-100 rounded-r-lg px-2">Save</button>
+        <button className="bg-slate-100 rounded-r-lg px-2" onClick={onnotes}>Save</button>
       </div>
       {/*div mover*/}
     </>

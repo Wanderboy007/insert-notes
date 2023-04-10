@@ -11,7 +11,8 @@ import { useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Index() {
-  const { user, error, isLoading } = useUser();
+  const { user, error, isLoading } = useUser(); 
+ 
   return (
     <>
       <Head>
@@ -188,8 +189,16 @@ const Notloggedin = () => {
                   onChange={(e) => {
                     if (e.target.value == "hello") {
                       setTeacher(true);
+                      <Link className="flex justify-center" href="/home">
+          <div className="text-4xl">Next</div>
+            <BsFillArrowRightSquareFill className="text-4xl" />
+          </Link>
                     } else {
                       setTeacher(false);
+                      <Link className="flex justify-center" href="#">
+          <div className="text-4xl">Next</div>
+            <BsFillArrowRightSquareFill className="text-4xl" />
+          </Link>
                     }
                   }}
                   required

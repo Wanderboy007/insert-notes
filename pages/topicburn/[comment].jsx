@@ -39,7 +39,7 @@ const demo = {count:0,extra:""}
     setNotes(JSON.parse(stored))}
     
     
-}, [notestab]);
+}, [notestab,notes]);
   
     function onnotes(){ 
 
@@ -125,11 +125,8 @@ if (user) {
   return (
     <>
       <nav className="flex gap-20 justify-center mb-5 py-5 bg-teal-500 rounded-b-lg">
-        <Link href="" className="text-xl cursor-pointer">
+        <Link href="/home" className="text-xl cursor-pointer">
           Home
-        </Link>
-        <Link href="" className="text-xl cursor-pointer">
-          About us
         </Link>
         <Link
           href="/ass"
@@ -138,7 +135,7 @@ if (user) {
           Assessment
         </Link>
         <div onClick={()=>setNotestab(!notestab)} className="text-xl cursor-pointer inline">
-          Notes
+          Saved
         </div> 
         {user ? (
           <div className="flex gap-20">

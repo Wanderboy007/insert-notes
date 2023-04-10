@@ -1,8 +1,16 @@
 import { FaChalkboardTeacher } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
+import Image from "next/image";
 import React, { useState , useEffect } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import Styles from "../../styles/viewpdf.module.css";
-import Link from "next/link";
+import Link from "next/link"; 
+import plams from "../../public/plams.png"
+import phy from "../../public/phy.png"
+import rule from "../../public/rule.png"
+import lund from "../../public/lund.png"
+
+
 import clientPromise from "../../lib/mongodb";
 
 
@@ -15,16 +23,36 @@ export default function Topicburn({comment}) {
   const[res,setRes] = useState([])
 
 // --------------------------------------------------------------------------
-
-  const[notestab,setNotab] = useState(false)
-  const [notes,setNotes] = useState([]);
-  console.log(notes)
+const demo = {count:0,extra:""}
+  const[notestab,setNotestab] = useState(false)
+  const [notes,setNotes] = useState([demo]); 
   
+  
+
+ 
+
+  useEffect(() => {
+    if(localStorage.getItem('hi') == null && localStorage.getItem('hi') !== undefined ){window.localStorage.setItem("hi", JSON.stringify(notes));}
+    else{
+    []
+    const stored = localStorage.getItem("hi")
+    setNotes(JSON.parse(stored))}
+    
+    
+}, [notestab]);
   
     function onnotes(){ 
-      setNotes((prev)=>[...prev,{extra}])
+
+      setNotes((prev)=>[...prev,{count,extra}]) 
+      setCount(count+1)
+      window.localStorage.setItem("hi", JSON.stringify(notes));
     
     }
+
+    // const [value, setValue] = useState("");
+
+
+const[count,setCount] = useState(1) 
 
 
 // -----------------------------------------------------------------------------
@@ -109,7 +137,7 @@ if (user) {
         >
           Assessment
         </Link>
-        <div onClick={()=>setNotab(!notestab)} className="text-xl cursor-pointer inline">
+        <div onClick={()=>setNotestab(!notestab)} className="text-xl cursor-pointer inline">
           Notes
         </div> 
         {user ? (
@@ -132,14 +160,20 @@ if (user) {
         )}
       </nav>
 
-
+      
 
       {/* ---------------------------------------navbar ends------------------------------------------- */}
-
+    
 
 {/* -----------------------------------notes---------------------------------------- */}
 
-<div className="w-2/3 h-screen "></div>
+{notestab?<div className="w-2/3 h-1/2 fixed left-8 bg-white  overflow-y-auto "><div className="flex items-center  justify-around"><h1 className="text-3xl">Saved notes</h1> <div onClick={()=>setNotestab(!notestab)} className="text-xl cursor-pointer inline">
+          <GrClose/>
+        </div> </div>
+  {notes.map((note)=>
+  <div className="flex" key={note.count}><div className="my-2 border-2 shadow-lg"  >{note.extra}</div></div>)}
+ 
+</div>:<div></div>}
 
 {/* -----------------------------------notes ends---------------------------------------- */}
 
@@ -329,7 +363,10 @@ if (user) {
             burns classified as moderate or more often or severe Full thickness
             burn 10% Body surface area.
           </p>
+          <div>
           <h3 className="text-3xl my-10">✓ The rule of nine :</h3>
+          <Image src={rule} width={500} height={500} alt="no image yet"></Image>
+          </div>
           <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             This allows the emergency medical provider to obtain a quick
             estimate of how much body surface area is burned. For example, if a
@@ -341,8 +378,11 @@ if (user) {
             leg). Thus, if a patient&apos;s entire back (18%), but only half of
             their left leg (9%) was burned, the amount of BSA affected would be
             27%.
-          </p>
+          </p> 
+          <div>
           <h3 className="text-3xl my-10">✓ Lund and Browder method :</h3>
+          <Image src={lund} width={500} height={500} alt="no image yet"></Image>
+          </div>
           <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             For children and infants, the Lund-Browder chart is used to assess
             the burned body surface area. Different percentages are used because
@@ -350,7 +390,10 @@ if (user) {
             surface area of the limbs is typically larger in children than that
             of an adult.
           </p>
+          <div>
           <h3 className="text-3xl my-10">✓ Palm method</h3>
+          <Image src={plams} width={500} height={500} alt="no image yet"></Image>
+          </div>
           <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             The &quot;rule of palm&quot; is another way to estimate the size of
             a burn. The palm of the person who is burned (not fingers or wrist
@@ -358,9 +401,12 @@ if (user) {
             the body surface area burned. It can be hard to estimate the size of
             a burn
           </p>
+          <div>
           <h2 className="text-3xl text-center my-10">
             ❖ Pathophysiology of burns :
-          </h2>
+          </h2> 
+          <Image src={phy} width={500} height={500} alt="no image yet"></Image>
+          </div>
           <h3 className="text-3xl my-10">❖ Diagnostic studies in burns:</h3>
           <p onMouseUp={selecttext} class="my-4 text-lg text-gray-500">
             1) Complete blood test : initial increased haematocrit (Hct) due to

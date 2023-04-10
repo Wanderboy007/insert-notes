@@ -200,16 +200,16 @@ const Notloggedin = () => {
             </div>
           </div>
 
-          {/* <button
+          <button
             type="submit"
             onSubmit={(e) => handleSubmit()}
             className="flex items-center justify-center gap-3"
           >
-            <div className="text-4xl">Next</div>
+            
+          </button>
+          <Link className="flex justify-center" href="/home">
+          <div className="text-4xl">Next</div>
             <BsFillArrowRightSquareFill className="text-4xl" />
-          </button> */}
-          <Link className="flex justify-center  " href="/home">
-            home
           </Link>
         </form>
       </>

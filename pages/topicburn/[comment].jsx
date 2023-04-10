@@ -39,7 +39,7 @@ const demo = {count:0,extra:""}
     setNotes(JSON.parse(stored))}
     
     
-}, [notestab,notes]);
+}, [notestab]);
   
     function onnotes(){ 
 

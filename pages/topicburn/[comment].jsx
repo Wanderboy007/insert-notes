@@ -36,10 +36,8 @@ const demo = {count:0,extra:""}
     else{
     []
     const stored = localStorage.getItem("hi")
-    setNotes(JSON.parse(stored))}
-    
-    
-}, [notestab]);
+    setNotes(JSON.parse(stored))}  
+}, [notes]);
   
     function onnotes(){ 
 
@@ -120,7 +118,13 @@ if (user) {
     scrl("18800");
     const elem = document.getElementById("askprompt");
     elem.style.left = -500 + "px";
-  }
+  } 
+
+  // -----------------------------teacher login-------------------------------------
+
+
+
+  // -----------------------------teacher login ends-------------------------------------
 
   return (
     <>

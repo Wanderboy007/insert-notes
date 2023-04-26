@@ -37,7 +37,7 @@ const demo = {count:0,extra:""}
     []
     const stored = localStorage.getItem("hi")
     setNotes(JSON.parse(stored))}  
-}, [notes]);
+}, []);
   
     function onnotes(){ 
 

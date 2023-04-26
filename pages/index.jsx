@@ -23,7 +23,7 @@ export default function Index() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head> 
 
-  
+ 
 
   {shownavp?<nav className="bg-white border-gray-200 dark:bg-gray-900">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -84,10 +84,53 @@ export default function Index() {
           )}
   </ul>
 </nav> }
-  
+   */}
 
       
-{!user ? loggedin() : Notloggedin()} 
+{/* {!user ? loggedin() : Notloggedin()}  */}
+
+
+
+
+
+
+
+
+
+      {/* <div className="h-screen overflow-hidden">
+        <nav className="flex gap-20 justify-center mb-5 py-5 bg-teal-500 rounded-b-lg">
+          <Link href="" className="text-xl cursor-pointer">
+            Home
+          </Link>
+          <Link href="" className="text-xl cursor-pointer">
+            About us
+          </Link>
+          {user ? (
+            <div className="flex gap-20">
+              <div className="text-xl">welcome,{user.name}</div>
+              <Link
+                className="text-xl cursor-pointer"
+                href="/api/auth/logout"
+              >
+                Logout
+              </Link>
+            </div>
+          ) : (
+            <Link
+              className="text-xl cursor-pointer"
+              href="/api/auth/login"
+            >
+              Login
+            </Link>
+          )}
+        </nav>
+        {!user ? loggedin() : Notloggedin()}
+      </div> 
+
+//navbar ends
+ 
+
+
     </>
   );
 }  
@@ -98,6 +141,7 @@ export default function Index() {
 
 
 // navbar
+
 
 const loggedin = () => {
   return (

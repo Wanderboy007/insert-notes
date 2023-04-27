@@ -149,11 +149,6 @@ const loggedin = () => {
       {/* hero section */}
       <div className="flex justify-center m-20 gap-3 ">
         <div className="flex flex-col"> 
-
-
-
-
-
         <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
   <div class="md:flex">
     <div class="md:shrink-0">
@@ -169,7 +164,7 @@ const loggedin = () => {
             Insert Note is a website designed for nursing students to make
             notes, keep track of assignments and access study materials. Its
             user-friendly interface and mobile accessibility make it an ideal
-            platform for studying on the go.
+            platform for studying on go.
           </p>
           <p className="mb-3 text-gray-500 dark:text-gray-700 ">
             Insert Note is a comprehensive website that offers nursing students
